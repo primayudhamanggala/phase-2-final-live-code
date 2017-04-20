@@ -18,6 +18,7 @@ module.exports = {
     dbAuthor.findOne({username: req.body.username}, (err, author) => {
       if (passwordHash.verify(req.body.password, author.password)) {
         let token = jwt.sign({
+          id: author._id,
           name: author.name,
           username: author.username,
           email: author.email

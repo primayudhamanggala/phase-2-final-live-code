@@ -44,7 +44,8 @@ export const REMOVE_AUTHOR = ({commit}, authorId) => {
 
 //article actions
 export const ADD_ARTICLE = ({commit}, articleData) => {
-  axios.post(`http://localhost:3000/articles`, articleData)
+  axios.post(`http://localhost:3000/articles`, articleData,
+  {headers: {'token': window.localStorage.getItem('token')}})
   .then((res) => {
     commit(types.ADD_ARTICLE, res.data)
   })
@@ -64,8 +65,8 @@ export const GET_ARTICLES = ({commit}) => {
 }
 
 export const UPDATE_ARTICLE = ({commit}, articleData) => {
-  console.log(articleData);
-  axios.put(`http://localhost:3000/articles/${articleData._id}`, articleData)
+  axios.put(`http://localhost:3000/articles/${articleData._id}`, articleData,
+  {headers: {'token': window.localStorage.getItem('token')}})
   .then((res) => {
     commit(types.UPDATE_ARTICLE, res.data)
   })

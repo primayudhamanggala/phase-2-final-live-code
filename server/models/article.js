@@ -8,14 +8,8 @@ let articleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Author'
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
-  }
+  createdAt: Date,
+  updatedAt: Date
 })
 
 let Article = mongoose.model('Article', articleSchema)
