@@ -12,7 +12,7 @@
           <el-input v-model="form.username"></el-input>
         </el-form-item>
         <el-form-item label="Password">
-          <el-input v-model="form.password"></el-input>
+          <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
       </el-form>
         <span>
@@ -22,7 +22,7 @@
         </span>
         <span slot="footer" class="dialog-footer">
           <el-button @click="loginForm = false">Cancel</el-button>
-          <el-button type="primary" @click="onSubmit">LOGIN</el-button>
+          <el-button type="primary" @click="login(form)">LOGIN</el-button>
         </span>
     </el-dialog>
 
@@ -39,22 +39,23 @@
           <el-input v-model="form.email"></el-input>
         </el-form-item>
         <el-form-item label="Password">
-          <el-input v-model="form.password"></el-input>
+          <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
       </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="signupForm = false">Cancel</el-button>
-          <el-button type="primary" @click="onSubmit">LOGIN</el-button>
+          <el-button type="primary" @click="addAuthor">SUBMIT</el-button>
         </span>
     </el-dialog>
-
-
 
 
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
+
 export default {
   data() {
     return {
@@ -68,12 +69,18 @@ export default {
         password: ''
       }
     }
-  }
+  },
+  methods: mapActions([
+      'addAuthor'
+    ])
 }
 </script>
 
 <style>
   #login {
     float: right;
+  }
+  body {
+    font-family: Helvetica;
   }
 </style>

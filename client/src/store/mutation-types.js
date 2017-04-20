@@ -1,4 +1,4 @@
-export const ADD_AUTHOR = 'ADD_AUTHOR'
+export const ADD_AUTHOR = 'addAuthor'
 export const GET_AUTHORS = 'GET_AUTHORS'
 export const UPDATE_AUTHOR = 'UPDATE_AUTHOR'
 export const REMOVE_AUTHOR = 'REMOVE_AUTHOR'

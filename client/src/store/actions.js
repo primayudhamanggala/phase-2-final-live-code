@@ -1,7 +1,8 @@
 import * as types from './mutation-types'
 
 //author actions
-export const ADD_AUTHOR = ({commit}, authorData) => {
+export const addAuthor = ({commit}, authorData) => {
+  console.log('testing');
   axios.post(`http://localhost:3000/authors`, authorData)
   .then((res) => {
     commit(types.ADD_AUTHOR, res.data)

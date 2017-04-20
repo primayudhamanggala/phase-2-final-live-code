@@ -24,7 +24,7 @@ module.exports = {
         }, process.env.SECRET_KEY)
         res.send(token)
       } else {
-        res.send('username doesnt exists')
+        res.send(`Username or Password doesn't exists`)
       }
     })
   },
