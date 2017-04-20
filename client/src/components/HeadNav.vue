@@ -3,7 +3,21 @@
 
     <el-menu theme="dark" class="el-menu-demo" mode="horizontal">
       <el-menu-item index="1">SIMPLE CMS</el-menu-item>
-      <el-menu-item id="login" index="2" @click="loginForm = true">LOGIN</el-menu-item>
+      <el-menu-item
+      id="logout"
+      index="2"
+      @click="logout"
+      >
+        LOGOUT
+      </el-menu-item>
+      <el-menu-item
+      id="login"
+      index="2"
+      @click="loginForm = true"
+
+      >
+        LOGIN
+      </el-menu-item>
     </el-menu>
 
     <el-dialog title="LOGIN FORM" v-model="loginForm" size="tiny">
@@ -22,7 +36,7 @@
         </span>
         <span slot="footer" class="dialog-footer">
           <el-button @click="loginForm = false">Cancel</el-button>
-          <el-button type="primary" @click="login(form)">LOGIN</el-button>
+          <el-button type="primary" @click="login(form); loginForm = false">LOGIN</el-button>
         </span>
     </el-dialog>
 
@@ -44,7 +58,7 @@
       </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="signupForm = false">Cancel</el-button>
-          <el-button type="primary" @click="addAuthor">SUBMIT</el-button>
+          <el-button type="primary" @click="ADD_AUTHOR(form); signupForm = false">LOGIN</el-button>
         </span>
     </el-dialog>
 
@@ -59,6 +73,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      authentication: false,
       activeIndex: 1,
       loginForm: false,
       signupForm: false,
@@ -70,14 +85,34 @@ export default {
       }
     }
   },
-  methods: mapActions([
-      'addAuthor'
-    ])
+  methods: {
+    ...mapActions([
+      'ADD_AUTHOR'
+    ]),
+    login : (form) => {
+      let self = this
+      axios.post(`http://localhost:3000/authors/signin`, form)
+      .then((res) => {
+        localStorage.setItem('token', res.data)
+        self.authentication = true
+        self.loginForm = false
+      })
+      .catch((err) => {
+        alert(err.message)
+      })
+    },
+    logout : () => {
+      localStorage.clear()
+    }
+  }
 }
 </script>
 
 <style>
   #login {
+    float: right;
+  }
+  #logout {
     float: right;
   }
   body {

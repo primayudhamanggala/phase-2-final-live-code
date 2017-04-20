@@ -1,9 +1,9 @@
 import * as types from './mutation-types'
 
 //author actions
-export const addAuthor = ({commit}, authorData) => {
-  console.log('testing');
-  axios.post(`http://localhost:3000/authors`, authorData)
+export const ADD_AUTHOR = ({commit}, authorData) => {
+  console.log(authorData);
+  axios.post(`http://localhost:3000/authors/signup`, authorData)
   .then((res) => {
     commit(types.ADD_AUTHOR, res.data)
   })
@@ -23,7 +23,7 @@ export const GET_AUTHORS = ({commit}) => {
 }
 
 export const UPDATE_AUTHOR = ({commit}, authorData) => {
-  axios.post(`http://localhost:3000/authors/${authorData._id}`, authorData)
+  axios.put(`http://localhost:3000/authors/${authorData._id}`, authorData)
   .then((res) => {
     commit(types.UPDATE_AUTHOR, res.data)
   })
@@ -33,7 +33,7 @@ export const UPDATE_AUTHOR = ({commit}, authorData) => {
 }
 
 export const REMOVE_AUTHOR = ({commit}, authorId) => {
-  axios.post(`http://localhost:3000/authors/${authorId}`)
+  axios.delete(`http://localhost:3000/authors/${authorId}`)
   .then((res) => {
     commit(types.REMOVE_AUTHOR, res.data)
   })
@@ -64,7 +64,8 @@ export const GET_ARTICLES = ({commit}) => {
 }
 
 export const UPDATE_ARTICLE = ({commit}, articleData) => {
-  axios.post(`http://localhost:3000/articles/${articleData._id}`, articleData)
+  console.log(articleData);
+  axios.put(`http://localhost:3000/articles/${articleData._id}`, articleData)
   .then((res) => {
     commit(types.UPDATE_ARTICLE, res.data)
   })
@@ -74,7 +75,7 @@ export const UPDATE_ARTICLE = ({commit}, articleData) => {
 }
 
 export const REMOVE_ARTICLE = ({commit}, articleId) => {
-  axios.post(`http://localhost:3000/articles/${articleId}`)
+  axios.delete(`http://localhost:3000/articles/${articleId}`)
   .then((res) => {
     commit(types.REMOVE_ARTICLE, res.data)
   })
