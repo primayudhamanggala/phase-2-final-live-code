@@ -1,5 +1,5 @@
 const dbAuthor = require('../models/author')
-
+const jwt = require('jsonwebtoken')
 
 module.exports = {
   create: (req, res) => {
