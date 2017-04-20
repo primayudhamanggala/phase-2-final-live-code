@@ -12,7 +12,7 @@ module.exports = {
     })
   },
   getAll: (req, res) => {
-    dbArticle.find({}, (err, article) => {
+    dbArticle.find().populate('author').exec((err, article) => {
       if (err) {
         res.send(err.message)
       } else {

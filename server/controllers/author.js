@@ -1,13 +1,30 @@
 const dbAuthor = require('../models/author')
 const jwt = require('jsonwebtoken')
+const passwordHash = require('password-hash')
+require('dotenv').config()
 
 module.exports = {
   create: (req, res) => {
+    req.body.password = passwordHash.generate(req.body.password)
     dbAuthor.create(req.body, (err, author) => {
       if (err) {
         res.send(err.message)
       } else {
         res.send(author)
+      }
+    })
+  },
+  login: (req, res) => {
+    dbAuthor.findOne({username: req.body.username}, (err, author) => {
+      if (passwordHash.verify(req.body.password, author.password)) {
+        let token = jwt.sign({
+          name: author.name,
+          username: author.username,
+          email: author.email
+        }, process.env.SECRET_KEY)
+        res.send(token)
+      } else {
+        res.send('username doesnt exists')
       }
     })
   },

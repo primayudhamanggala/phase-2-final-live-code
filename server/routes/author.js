@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router()
 const authorController = require('../controllers/author')
+const verifier = require('../helpers/jwt')
 
+router.post('/signup', authorController.create)
 
-router.post('/', authorController.create)
+router.post('/signin', authorController.login)
 
-router.get('/', authorController.getAll)
+router.get('/', verifier, authorController.getAll)
 
-router.put('/:id', authorController.update)
+router.put('/:id', verifier, authorController.update)
 
-router.delete('/:id', authorController.delete)
+router.delete('/:id', verifier, authorController.delete)
 
 
 
